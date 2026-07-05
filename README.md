@@ -16,7 +16,7 @@ My idea of building this setup at first was to make a setup that was my own with
 
 But I just had to flex something that I put hundreds of hours into for the first time and I loved learning and doing this the entire way through. I am a changed man.
 
-I spent WAY too much time fine-tuning this setup—building a custom hardware-accelerated OpenGL galaxy background in C++, overriding GTK themes by hand, and getting everything running as fast and lightweight as possible.
+I spent WAY too much time finetuning this setup, building a custom hardware accelerated OpenGL galaxy background in C++, overriding GTK themes by hand, and getting everything running as fast and lightweight as possible.
 
 Like a space station terminal should be: this setup is very lightweight and runs on only 0.5 GB RAM on idle + dashboard and about 15% CPU overhead on an 11th gen intel i3. 
 
