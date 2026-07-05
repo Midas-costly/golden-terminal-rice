@@ -1,0 +1,16 @@
+bind=escape,cancel
+
+bind=l,lock
+bind=e,logout
+bind=s,suspend
+bind=h,hibernate
+bind=q,shutdown
+bind=r,reboot
+
+bind=L,lock
+bind=E,logout
+bind=S,suspend
+bind=H,hibernate
+bind=Q,shutdown
+bind=R,reboot
+

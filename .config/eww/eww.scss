@@ -1,0 +1,100 @@
+/* --- fonts --- */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+}
+
+/* --- main board --- */
+.dash-container {
+    background-color: #000000; 
+    border: 1px solid #E5A91A; 
+    padding: 2px; 
+    min-height: 1072px; 
+}
+
+/* --- columns --- */
+.col-left { padding-right: 0px; }
+.col-right { padding-left: 0px; }
+
+/* --- waybar --- */
+.panel {
+    background-color: #050400; 
+    border: 1px solid #E5A91A;
+    padding: 15px; 
+}
+
+/* --- welcome pilot --- */
+.title { color: #E5A91A; font-size: 20px; font-weight: bold; margin-bottom: 4px; }
+.subtitle { color: #C0C0C0; font-size: 14px; margin-bottom: 12px; }
+.radar-box { margin-left: 25px; } 
+.ws-module { margin-right: 18px; }
+.ws-square { font-size: 14px; margin-bottom: 4px; }
+.ws-roman { font-size: 14px; color: #C0C0C0; font-weight: bold; }
+
+.active { color: #E5A91A; }
+.danger { color: #DC143C; }
+.clear { color: #50C878; }
+
+
+/* change heading colors here*/
+.section-head { 
+    color: #B87333; 
+    font-weight: bold; 
+    font-size: 18px; 
+    margin-bottom: 15px; 
+}
+
+.head-hw     { color: #FF8800; } 
+.head-env    { color: #00FF00; } 
+.head-net    { color: #00FFFF; } 
+.head-radar  { color: #9933FF; } 
+.head-kernel { color: #FF33CC; } 
+
+/*TELEMETRY*/
+.stat-group { margin-bottom: 12px; margin-left: 5px; }
+.stat-row { margin-bottom: 2px; }
+
+.stat-lbl { color: #FFB300; font-size: 16px; min-width: 50px; } 
+.stat-bar { color: #FFE066; font-size: 16px; min-width: 250px; } 
+.stat-val-under { color: #FFE066; font-size: 14px; margin-left: 50px; } 
+
+/*logs*/
+.radar-header { color: #FFB300; font-size: 14px; font-weight: bold; margin-bottom: 10px; margin-left: 5px; }
+.radar-line { color: #FFE066; font-size: 14px; margin-bottom: 4px; margin-left: 5px; }
+.log-line { color: #FFE066; font-size: 13px; margin-bottom: 6px; margin-left: 5px; }
+
+/* --- audio visualizer --- */
+.media-text { color: #FFFF00; margin-bottom: 0px; }
+
+.media-artist { 
+    color: #FF3333; 
+    margin-left: 16px; 
+    margin-right: 16px; 
+    margin-bottom: 0px; 
+}
+
+.media-title { 
+    color: #FF00FF; 
+    margin-left: 16px; 
+    margin-right: 16px; 
+    margin-bottom: 0px; 
+}
+
+.cava-panel {
+    min-height: 180px; 
+    padding-top: 10px;
+    padding-bottom: 2px; 
+}
+
+.cava-matrix { 
+    color: #E5A91A;       
+    font-size: 16px;      
+    font-weight: bold;
+    letter-spacing: 2px; 
+}
+
+.cava-col { 
+    color: #E5A91A;       
+    font-size: 16px;      
+    font-weight: bold;
+}
+

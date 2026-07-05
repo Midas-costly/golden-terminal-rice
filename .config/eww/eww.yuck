@@ -1,0 +1,197 @@
+;; --- LISTENERS & POLLERS ---
+(defpoll media_data :interval "2s" "~/.config/eww/scripts/media.sh")
+(deflisten sys_data :initial '{"cpu_bar": "........................", "cpu_val": "00.0", "ram_bar": "........................", "ram_val": "00.0", "tmp_bar": "........................", "tmp_val": "00.0", "dsk_bar": "........................", "dsk_val": "00.0", "swp_bar": "........................", "swp_val": "00.0", "net_down_bar": "........................", "net_down_val": "00000.0", "net_up_bar": "........................", "net_up_val": "00000.0", "uptm_bar": "------------------------", "uptm_val": "00H 00M 00S", "bat_bar": "------------------------", "bat_val": "100%", "bat_lbl": "PWR ", "bri_bar": "------------------------", "bri_val": "100%", "vol_bar": "------------------------", "vol_val": "100%", "wifi_stat": "[....]", "procs": ["","","","",""], "logs": ["","","","",""]}' "~/.config/eww/scripts/sys_mon.py")
+
+(defpoll sys_uptime :interval "1s" "awk '{printf \"%02dH %02dM %02dS\", int($1/3600), int(($1%3600)/60), int($1%60)}' /proc/uptime")
+
+;; --- DATA LISTENERS ---
+(deflisten workspaces :initial "[]" "~/.config/eww/scripts/workspace.sh") 
+(deflisten cava_data :initial '{"matrix": "..."}' "~/.config/eww/scripts/audio_visualizer.sh")
+
+;; Network Poller
+(defpoll wifi_ssid :interval "3s" "nmcli -t -f active,ssid dev wifi 2>/dev/null | grep '^yes' | cut -d':' -f2 || echo 'OFFLINE'")
+
+
+;; --- THE WINDOW STRUCTURE ---
+(defwindow midas-dash
+  :monitor 0
+  :geometry (geometry :x "2px"
+                      :y "2px"
+                      :width "836px"
+                      :height "1076px"
+                      :anchor "top left")
+  :stacking "bottom"
+  :exclusive false
+  :focusable false
+  (dashboard_layout))
+
+;; --- THE WIDGET LAYOUT ---
+(defwidget dashboard_layout []
+  (box :class "dash-container" :orientation "v" :space-evenly false :spacing 2 :valign "fill"
+    
+    (box :orientation "h" :space-evenly true :spacing 2 :vexpand true
+      
+      ;; LEFT COLUMN
+      (box :class "col-left" :orientation "v" :space-evenly false :spacing 2 :vexpand true
+        
+        (box :class "panel" :orientation "v" :space-evenly false :halign "fill"
+          (label :class "title" :text "WELCOME BACK, PILOT." :halign "start")
+          (label :class "subtitle" :text "GHOST DASHBOARD // ACTIVE" :halign "start")
+          (box :class "radar-box" :orientation "h" :space-evenly false :halign "start"
+            (for ws in workspaces
+              (box :orientation "v" :class "ws-module" :space-evenly false :halign "center"
+                (label :class "ws-square ${ws.state}" :text "■")
+                (label :class "ws-roman" :text "${ws.roman}")
+              )
+            )
+          )
+        )
+        ;;hardware tele-----------------------------------------------------------------------------------------------------------
+        (box :class "panel" :orientation "v" :space-evenly false :halign "fill" :vexpand true
+          (label :class "section-head head-hw" :text "[ HARDWARE_TELEMETRY ]" :halign "start")
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "CPU" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.cpu_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.cpu_val}%" :halign "start")
+          )
+          ;;RAM=======================================================
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "RAM" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.ram_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.ram_val} GB" :halign "start")
+          )
+          ;;TEMP==================================================
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "TEMP" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.tmp_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.tmp_val}°C" :halign "start")
+          )
+          ;;DISK===================================================
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "DISK" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.dsk_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.dsk_val}%" :halign "start")
+          )
+
+          ;; SWAP
+        (box :class "stat-group" :orientation "v" :space-evenly false
+          (box :class "stat-row" :orientation "h" :space-evenly false
+            (label :class "stat-lbl" :text "SWAP ")
+            (label :class "stat-bar" :text "[${sys_data.swp_bar}]")
+          )
+          (label :class "stat-val-under" :text "${sys_data.swp_val} GB" :halign "start")
+        )
+
+        ;; WIFI
+        (box :class "stat-group" :orientation "v" :space-evenly false
+          (box :class "stat-row" :orientation "h" :space-evenly false
+            (label :class "stat-lbl" :text "WIFI ")
+            (label :class "stat-bar" :text "[ ${wifi_ssid} ] ${sys_data.wifi_stat}")
+          )
+        )     
+  
+      ) 
+      ;;network uplinks ----------------------------------------------------------------------------------------------------------
+        (box :class "panel" :orientation "v" :space-evenly false :halign "fill"
+          (label :class "section-head head-net" :text "[ NETWORK_UPLINK ]" :halign "start")
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "DOWN" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.net_down_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.net_down_val} KB/s" :halign "start")
+          )
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "UP" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.net_up_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.net_up_val} KB/s" :halign "start")
+          )
+        )
+      )
+
+      ;; RIGHT COLUMN 
+      (box :class "col-right" :orientation "v" :space-evenly false :spacing 2 :vexpand true
+
+        ;;tactical process radar ----------------------------------------------------------------------------------------------------
+        (box :class "panel" :orientation "v" :space-evenly false :halign "fill"
+          (label :class "section-head head-radar" :text "[ TACTICAL_PROCESS_RADAR ]" :halign "start")
+          (label :class "radar-header" :text "PID    NAME        CPU%   RAM%" :halign "start")
+          (for p in "${sys_data.procs}"
+            (label :class "radar-line" :show-truncated false :text "${p}" :halign "start")
+          )
+        )
+        ;;kernel logs --------------------------------------------------------------------------------------------------------------
+        (box :class "panel" :orientation "v" :space-evenly false :halign "fill" :vexpand true
+          (label :class "section-head head-kernel" :text "[ KERNEL_LOGS ]" :halign "start")
+          (for log in "${sys_data.logs}"
+            (label :class "log-line" :show-truncated false :text "> ${log}" :halign "start")
+          )
+        )
+        ;;local env tele -----------------------------------------------------------------------------------------------------------
+        (box :class "panel" :orientation "v" :space-evenly false :halign "fill"
+          (label :class "section-head head-env" :text "[ LOCAL_ENV_TELEMETRY ]" :halign "start")
+          
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "UPTM" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.uptm_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.uptm_val}" :halign "start")
+          )
+
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "${sys_data.bat_lbl}" :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.bat_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.bat_val} CAPACITY" :halign "start")
+          )
+
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "LUM " :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.bri_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.bri_val} BRIGHTNESS" :halign "start")
+          )
+
+          (box :class "stat-group" :orientation "v" :space-evenly false
+            (box :class "stat-row" :orientation "h" :space-evenly false
+              (label :class "stat-lbl" :text "VOL " :halign "start")
+              (label :class "stat-bar" :show-truncated false :text "[${sys_data.vol_bar}]")
+            )
+            (label :class "stat-val-under" :text "${sys_data.vol_val} GAIN" :halign "start")
+          )
+        )
+      )
+    )
+
+    ;; --- BOTTOM DECK: MEDIA & VISUALIZER ---
+    (box :orientation "v" :space-evenly false :spacing 2 :valign "end"
+      
+      (box :class "panel" :orientation "v" :space-evenly false :halign "fill"
+        (box :orientation "h" :space-evenly false :halign "center"
+          (label :class "section-head media-text" :text "[ NOW PLAYING:")
+          (label :class "section-head media-artist" :text "|${media_data.artist}")
+          (label :class "section-head media-text" :text "-")
+          (label :class "section-head media-title" :text "${media_data.title}|")
+          (label :class "section-head media-text" :text "]")
+        )
+      )
+      
+      (box :class "panel cava-panel" :orientation "h" :space-evenly false :halign "fill" :valign "end"
+        (label :class "cava-matrix" :hexpand true :halign "center" :valign "end" :wrap false :show-truncated false :text "${cava_data.matrix}" :halign "center" :valign "end")
+      )
+    )
+  )
+)

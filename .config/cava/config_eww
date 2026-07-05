@@ -1,0 +1,11 @@
+[general]
+framerate = 15
+bars = 64
+[input]
+method = pipewire
+source = auto
+[output]
+method = raw
+raw_target = /dev/stdout
+data_format = ascii
+ascii_max_range = 60

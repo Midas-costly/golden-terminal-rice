@@ -1,0 +1,13 @@
+*.bin
+*.o
+*.so
+*.out
+
+.config/eww/scripts/starfield.bin
+
+.cache/
+*.log
+*.tmp
+*~
+
+/tmp/ghost_dash_state

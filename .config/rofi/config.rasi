@@ -1,0 +1,75 @@
+configuration {
+    font: "monospace 12";
+    show-icons: false;
+    display-drun: "EXECUTE [ > ]";
+}
+
+* {
+    bg: #000000;
+    bg-selected: #110A04;
+    fg: #E5A91A;
+    border-color: #E5A91A;
+    
+    background-color: @bg;
+    text-color: @fg;
+}
+
+window {
+    border: 2px solid;
+    border-color: @border-color;
+    padding: 15px;
+    width: 600px;
+    background-color: @bg;
+}
+
+mainbox {
+    spacing: 15px;
+}
+
+inputbar {
+    children: [prompt, entry];
+    padding: 0px 0px 10px 0px;
+    border: 0px 0px 1px 0px;
+    border-color: @border-color;
+    spacing: 15px;
+}
+
+prompt {
+    font: "monospace bold 12";
+    text-color: @fg;
+}
+
+entry {
+    placeholder: "Awaiting command...";
+    placeholder-color: #555555;
+    text-color: @fg;
+}
+
+listview {
+    lines: 10;
+    spacing: 5px;
+    scrollbar: false;
+    border: 0px;
+}
+
+element {
+    padding: 5px 10px;
+    border: 0px;
+}
+
+element normal.normal {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+element alternate.normal {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
+    text-color: @fg;
+    border: 1px solid;
+    border-color: @border-color;
+}

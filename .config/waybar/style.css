@@ -1,0 +1,141 @@
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    border-radius: 0px;
+    border: none;
+    min-height: 0px;
+}
+
+window#waybar {
+    background-color: #0A0600;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #D4AF37;
+}
+
+#custom-power, #network, #bluetooth, #pulseaudio, #pulseaudio.mic, #memory, #custom-discord-radar, #custom-steam-radar, #clock, #backlight, #mpris, #custom-media-skip, #battery {
+    background-color: #110A04;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #6A541C;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #6A541C; 
+    transition: all 0.2s ease;
+}
+
+#custom-discord-radar, #custom-steam-radar {
+    color: #E5A91A;
+    border-color: #E5A91A;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+#custom-discord-radar:hover, #custom-steam-radar:hover {
+    color: #FF3333;
+    border-color: #FF3333;
+    background-color: #110A04;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#custom-power:hover, #network:hover, #bluetooth:hover, #pulseaudio:hover, #pulseaudio.mic:hover, #memory:hover, #clock:hover, #backlight:hover, #battery:hover {
+    background-color: #1A1005;
+    color: #E5A91A;
+    border-color: #E5A91A;
+}
+
+#network { color: #D4AF37; }
+#bluetooth.on, #bluetooth.connected { color: #E5A91A; border-color: #E5A91A; }
+#clock { color: #E5A91A; font-weight: bold; border-color: #E5A91A; }
+
+#pulseaudio.mic {
+    color: #E5A91A;
+    border-color: #E5A91A;
+}
+
+#pulseaudio.mic.source-muted {
+    color: #6A541C;
+    border-color: #6A541C;
+}
+
+#pulseaudio.mic:hover,
+#pulseaudio.mic.source-muted:hover {
+    background-color: #1A1005;
+    color: #E5A91A;
+    border-color: #E5A91A;
+}
+
+#memory.warning, #memory.critical {
+    color: #E5A91A;
+    border-color: #E5A91A;
+    font-weight: bold;
+}
+
+#battery.charging, #battery.plugged, #battery.full {
+    color: #E5A91A;
+    border-color: #E5A91A;
+    font-weight: bold;
+    background-color: #110A04;
+}
+
+#battery.discharging {
+    color: #6A541C;
+    border-color: #6A541C;
+    font-weight: normal;
+    background-color: #110A04;
+}
+
+#custom-sensor {
+    font-size: 13px;
+    color: #E5A91A;
+    font-weight: bold;
+    background-color: #110A04;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E5A91A;
+    
+    min-width: 20px; 
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 6px;
+    margin-right: 6px;
+    
+    transition: none; 
+}
+
+#mpris {
+    color: #E5A91A;
+    border-color: #E5A91A;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+#mpris:hover {
+    color: #FF3333;
+    border-color: #FF3333;
+    background-color: #110A04;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#custom-media-skip {
+    color: #E5A91A;
+    border-color: #E5A91A;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+#custom-media-skip:hover {
+    color: #FF3333;
+    border-color: #FF3333;
+    background-color: #110A04;
+    box-shadow: none;
+    text-shadow: none;
+}
