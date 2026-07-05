@@ -3,7 +3,8 @@
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/e08f5f8f-e73a-46e7-b0ae-8b3e8ad8a543" />
 
 
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/47624a0e-1da0-4bea-985d-5922c1ec1385" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/04671c58-85b8-4a07-9041-4522389e6e26" />
+
 
 
 
@@ -11,8 +12,11 @@
 Hey! Welcome to my dotfiles repository.
 This was HEAVILY inspired by Pewdiepie and I really tried to challenge myself every step of the way.
 My idea of building this setup at first was to make a setup that was my own with my binds and an easy and enjoyable workflow that I try to create. So technically it's not meant for anybody else. 
+
 But I just had to flex something that I put hundreds of hours into for the first time and I loved learning and doing this the entire way through. I am a changed man.
+
 I spent WAY too much time fine-tuning this setup—building a custom hardware-accelerated OpenGL galaxy background in C++, overriding GTK themes by hand, and getting everything running as fast and lightweight as possible.
+
 Like a space station terminal should be: this setup is very lightweight and runs on only 0.5 GB RAM on idle + dashboard and about 15% CPU overhead on an 11th gen intel i3. 
 
 
@@ -24,7 +28,7 @@ The terminal has an animated ascii logo just like pewdiepie's but I added the py
 Because pewdiepie didnt include what he did to generate his, I figured it out and you can play around with the script and tweak it or whatever.
 I even added shades to it just like pewds!! So the secret is finally out. (TBH I might've been the only one obsessing over it)
 
-# The setup basically highlights two mode: 
+### The setup basically highlights two mode: 
 1. Chill mode: Where you chill and listen to music and watch the visualizer and the galaxy animation.
 2. Work mode: Where you got the waybar(activated with super+I once windows are actually on) and you work in a nice and organized environment. You can listen to music and I've binded media control(play/pause, skip/back).
 So check out the hyprland.lua file in .config/hypr/hyprland.lua for the keybinds and whatever.
