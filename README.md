@@ -49,7 +49,7 @@ Here are the primary packages powering this build (most can be grabbed via `pacm
 ```bash
 yay -S hyprland eww-wayland waybar rofi-wayland wlogout kitty fastfetch btop cava thunar vesktop
 ```
-### CRITICAL BEFORE YOU LAUNCH (Please Read!)
+# CRITICAL BEFORE YOU LAUNCH (Please Read!)
 
 **If you copy these configs over and certain things don't work out of the box, it is almost certainly due to one of these three hardware/path differences. Please check these first!**
 **1. Battery & AC Adapter Names (Waybar / Lockscreen Fix)**
@@ -68,14 +68,14 @@ Look at the output. If your battery says BAT0 instead of BAT1, open up the wayba
 
 Do the same for your AC adapter (ACAD vs ADP1 etc.).
 
-# 2. The Wallpaper Path (normal.png)
+## 2. The Wallpaper Path (normal.png)
 
 The background daemon explicitly looks for a single file path to load the wallpaper into memory without relying on bulky GUI tools.
 
 Inside the ~/.config/wallpapers/ folder, your primary wallpaper must be named exactly normal.png.
 If you want to use your own wallpaper, don't edit the daemon scripts—just drop your PNG image into ~/.config/wallpapers/ and rename it to normal.png. If it's named anything else, you'll just get a black void on boot!
 
-# 3. Compiling the C++ Starfield Background
+## 3. Compiling the C++ Starfield Background
 
 The spinning galaxy widget on the dashboard isn't a heavy video or a GIF; it is a raw C++ binary rendering an OpenGL shader directly to your screen.
 Because pre-compiled binaries often break when moved between different Linux kernel or library versions, you must compile the binary on your own machine.
@@ -89,32 +89,32 @@ If it runs cleanly without outputting errors, the starfield.bin executable is bu
 
 ##  Installation Steps
 
-1.   Clone the repo:
+### 1.   Clone the repo:
 ```bash
 git clone [https://github.com/Midas-costly/golden-terminal-rice.com ~/golden-terminal-dotfiles
 ```
-2.   Backup your existing configs (Seriously!):
+### 2.   Backup your existing configs (Seriously!):
 ```bash
 mkdir -p ~/.config-backup
 cp -r ~/.config/hypr ~/.config/waybar ~/.config/eww ~/.config-backup/ 2>/dev/null
 ```
 
-3.   Copy the new configs over:
+### 3.   Copy the new configs over:
 ```bash
 cp -r ~/ghost-dotfiles/.config/* ~/.config/
 cp ~/ghost-dotfiles/.bashrc ~/
 ```
 
-4.   Compile the galaxy engine:
+### 4.   Compile the galaxy engine:
 ```bash
 ~/.config/eww/recompile.sh
 ```
 
-5.   Verify your battery identifiers using ```ls /sys/class/power_supply/``` and edit the configs if needed.
+### 5.   Verify your battery identifiers using ```ls /sys/class/power_supply/``` and edit the configs if needed.
 
-6.   Please read the terminal to check errors if any because I honestly forgot what else you have to be careful of in order to get it right.
+### 6.   Please read the terminal to check errors if any because I honestly forgot what else you have to be careful of in order to get it right.
      Sorry in advanced and you can document any problems and I'll be sure to fix those and add their details accordingly for the people that try the setup in the future.
 
-7.   Log out of your desktop session and boot into Hyprland!
+### 7.   Log out of your desktop session and boot into Hyprland!
 
 Good Luck and please contact in case of problems. I would love to sharpen this more. Please don't be afraid to nag over the small details!!
