@@ -91,7 +91,7 @@ If it runs cleanly without outputting errors, the starfield.bin executable is bu
 
 ### 1.   Clone the repo:
 ```bash
-git clone [https://github.com/Midas-costly/golden-terminal-rice.com ~/golden-terminal-dotfiles
+git clone https://github.com/Midas-costly/golden-terminal-rice.git ~/golden-terminal-dotfiles
 ```
 ### 2.   Backup your existing configs (Seriously!):
 ```bash
